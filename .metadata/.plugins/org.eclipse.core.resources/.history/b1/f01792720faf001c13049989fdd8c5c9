@@ -1,7 +1,0 @@
-import java.io.*;
-import java.util.*;
-public class BalancingTree {
-	public static void main(String[] args) throws Exception {
-		
-	}
-}

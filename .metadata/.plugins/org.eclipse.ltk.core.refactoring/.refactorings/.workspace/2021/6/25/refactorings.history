@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Chinmay-apcs&apos; to &apos;Chinmay-projects&apos;" description="Rename resource &apos;Chinmay-apcs&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/Chinmay-apcs" name="Chinmay-projects" stamp="1623893408144" updateReferences="true"/>&#x0A;<refactoring comment="Delete resource &apos;Chinmay-projects&apos;" deleteContents="false" description="Delete resource &apos;Chinmay-projects&apos;" element1="/Chinmay-projects" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1623894004478"/>
-</session>

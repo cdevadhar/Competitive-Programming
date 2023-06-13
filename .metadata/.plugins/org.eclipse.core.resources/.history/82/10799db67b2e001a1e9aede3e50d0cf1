@@ -1,7 +1,0 @@
-import java.io.File;
-
-public class FileTest {
-	File homedir = new File(System.getProperty("user.home"));
-	File firstFile = new File(homedir, ".configfile");
-
-}

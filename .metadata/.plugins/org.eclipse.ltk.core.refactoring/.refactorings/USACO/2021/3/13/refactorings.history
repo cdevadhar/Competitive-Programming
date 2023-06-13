@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename local variable &apos;surrounded&apos; in &apos;Comfortable2.checkComfortable(...)&apos; to &apos;around&apos;&#x0A;- Original project: &apos;USACO&apos;&#x0A;- Original element: &apos;Comfortable2.checkComfortable(int, int).surrounded&apos;&#x0A;- Renamed element: &apos;surrounded&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;surrounded&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;{Comfortable2.java[Comfortable2~checkComfortable~I~I@surrounded!372!390!376!385!I!0!false" name="around" references="true" stamp="1616647861610" version="1.0"/>
-</session>

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename method &apos;Tournament.winsCount(...)&apos; to &apos;createKnockouts&apos;&#x0A;- Original project: &apos;Chinmay-apcs&apos;&#x0A;- Original element: &apos;Tournament.winsCount(...)&apos;&#x0A;- Renamed element: &apos;Tournament.createKnockouts(...)&apos;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;winsCount&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;{Tournament.java[Tournament~winsCount~QArrayList\&lt;QTeam;&gt;;" name="createKnockouts" references="true" stamp="1578010952693" version="1.0"/>
-</session>

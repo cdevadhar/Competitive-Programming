@@ -1,7 +1,0 @@
-
-public class IsRotation {
-	public boolean checkSubstring(String s1, String s2) {
-		return true;
-	}
-
-}

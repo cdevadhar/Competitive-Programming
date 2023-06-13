@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Extract local variable &apos;realSum&apos; from expression &apos;currentA.next.value + currentB.next.value + numtocarry&apos;&#x0A;- Original project: &apos;Chinmay-apcs&apos;&#x0A;- Variable name: &apos;realSum&apos;&#x0A;- Destination method: &apos;Node.addReverseLists()&apos;&#x0A;- Variable expression: &apos;currentA.next.value + currentB.next.value + numtocarry&apos;&#x0A;- Replace occurrences of expression with variable" description="Extract local variable &apos;realSum&apos;" final="false" id="org.eclipse.jdt.ui.extract.temp" input="/src&lt;{Node.java" name="realSum" replace="true" selection="4726 53" stamp="1591901736875" varType="false" version="1.0"/>
-</session>

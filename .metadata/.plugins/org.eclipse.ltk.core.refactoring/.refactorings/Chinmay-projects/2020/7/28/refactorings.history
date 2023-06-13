@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Extract method &apos;private String createSheet(Sheets service) throws IOException &apos; from &apos;SheetsAPI.createSheet()&apos; to &apos;SheetsAPI&apos;&#x0A;- Original project: &apos;Chinmay-apcs&apos;&#x0A;- Method name: &apos;createSheet&apos;&#x0A;- Destination type: &apos;SheetsAPI&apos;&#x0A;- Declared visibility: &apos;private&apos;" comments="false" description="Extract method &apos;createSheet&apos;" destination="0" exceptions="false" flags="786434" id="org.eclipse.jdt.ui.extract.method" input="/src&lt;{SheetsAPI.java" name="createSheet" replace="false" selection="2991 421" stamp="1593982700245" version="1.0" visibility="2"/>
-</session>

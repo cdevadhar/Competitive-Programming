@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Extract local variable &apos;index&apos; from expression &apos;getIndex(row,col)&apos;&#x0A;- Original project: &apos;Algorithms&apos;&#x0A;- Variable name: &apos;index&apos;&#x0A;- Destination method: &apos;Percolation.open()&apos;&#x0A;- Variable expression: &apos;getIndex(row,col)&apos;&#x0A;- Replace occurrences of expression with variable" description="Extract local variable &apos;index&apos;" final="false" id="org.eclipse.jdt.ui.extract.temp" input="/src&lt;{Percolation.java" name="index" replace="true" selection="617 18" stamp="1626151139294" varType="false" version="1.0"/>
-</session>

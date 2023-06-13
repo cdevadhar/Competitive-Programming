@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename type &apos;Double&apos; to &apos;DoubleOrNot&apos;&#x0A;- Original project: &apos;CodeJam&apos;&#x0A;- Original element: &apos;Double&apos;&#x0A;- Renamed element: &apos;DoubleOrNot&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Double&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{Double.java[Double" matchStrategy="1" name="DoubleOrNot" qualified="false" references="true" similarDeclarations="false" stamp="1649466830757" textual="false" version="1.0"/>
-</session>

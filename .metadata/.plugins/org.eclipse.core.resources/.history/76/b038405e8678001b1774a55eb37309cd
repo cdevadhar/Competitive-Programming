@@ -1,6 +1,0 @@
-import java.io.*;
-import java.util.*;
-public class Triangles2 {
-	static int n;
-	
-}

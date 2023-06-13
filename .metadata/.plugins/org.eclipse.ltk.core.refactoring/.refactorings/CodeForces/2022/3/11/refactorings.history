@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename local variable &apos;i&apos; in &apos;Hat.main(...)&apos; to &apos;tc&apos;&#x0A;- Original project: &apos;CodeForces&apos;&#x0A;- Original element: &apos;Hat.main(String[]).i&apos;&#x0A;- Renamed element: &apos;i&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;i&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;{Hat.java[Hat~main~\[QString;@i!175!181!179!179!I!0!false" name="tc" references="true" stamp="1646707507205" version="1.0"/>
-</session>
