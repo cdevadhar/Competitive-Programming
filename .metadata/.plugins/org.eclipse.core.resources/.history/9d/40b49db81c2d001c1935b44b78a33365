@@ -1,0 +1,75 @@
+
+/**
+ * Unit2.java
+ *
+ * @author - Chinmay Devadhar
+ * @author - Period 3
+ * @author - Id 10022320
+ *
+ *
+ */
+public class Unit2 {
+	public static void main(String[] args) {
+		//Creating the 5 Student objects using the 2 different constructors
+		//This constructor takes in name and ID, setting the grade to 0
+		Student sw = new Student("Snow White", 1001);
+		Student hd = new Student("Humpty Dumpty", 10012);
+		Student pc = new Student("Prince Charming", 10023);
+		//This constructor also takes in an initial grade and sets the grade accordingly
+		Student sb = new Student("Sleeping Beauty", 1004, 90);
+		Student hp = new Student("Henny Penny", 1005, 80);
+		
+		//Printing the objects calls their toString() method behing the scenes, so the information is displayed accordingly
+		System.out.println(sw);
+		System.out.println(hd);
+		System.out.println(pc);
+		System.out.println(sb);
+		System.out.println(hp);
+		
+		//Generating GAFE accounts for each student
+		//Use substring(0, 3) on the first and last names (use getFirstName() and getLastName() to get these)
+		//Convert the student ID to a string by concatenating an empty string, then use substring(length-3) to get the last 3 digits
+		//Concatenate all these strings to get the gafe account
+		String swGafe = (sw.getFirstName().substring(0, 3) + sw.getLastName().substring(0,3) + (sw.getStudentID()+"").substring((sw.getStudentID()+"").length()-3)).toLowerCase();
+		String hdGafe = (hd.getFirstName().substring(0, 3) + hd.getLastName().substring(0,3) + (hd.getStudentID()+"").substring((hd.getStudentID()+"").length()-3)).toLowerCase();
+		String pcGafe = (pc.getFirstName().substring(0, 3) + pc.getLastName().substring(0,3) + (pc.getStudentID()+"").substring((pc.getStudentID()+"").length()-3)).toLowerCase();
+		String sbGafe = (sb.getFirstName().substring(0, 3) + sb.getLastName().substring(0,3) + (sb.getStudentID()+"").substring((sb.getStudentID()+"").length()-3)).toLowerCase();
+		String hpGafe = (hp.getFirstName().substring(0, 3) + hp.getLastName().substring(0,3) + (hp.getStudentID()+"").substring((hp.getStudentID()+"").length()-3)).toLowerCase();
+		
+		//Use Math.random() multiplied by 101 to get a random integer from 0-100 and set this as the grade
+		sw.setGrade((int)(Math.random()*101));
+		hd.setGrade((int)(Math.random()*101));
+		pc.setGrade((int)(Math.random()*101));
+		sb.setGrade((int)(Math.random()*101));
+		hp.setGrade((int)(Math.random()*101));
+		System.out.println();
+		//This time, we can't just print the object because we need to print GAFE account as well
+		//Print each part of data for the students, separated by "\t" (a tab)
+		System.out.println("Name: " + sw.getName() + "\t" + "ID: " + sw.getStudentID() + "\t" + "GAFE: " + swGafe + "\t" + "Grade: " + sw.getGrade());
+		System.out.println("Name: " + hd.getName() + "\t" + "ID: " + hd.getStudentID() + "\t" + "GAFE: " + hdGafe + "\t" + "Grade: " + hd.getGrade());
+		System.out.println("Name: " + pc.getName() + "\t" + "ID: " + pc.getStudentID() + "\t" + "GAFE: " + pcGafe + "\t" + "Grade: " + pc.getGrade());
+		System.out.println("Name: " + sb.getName() + "\t" + "ID: " + sb.getStudentID() + "\t" + "GAFE: " + sbGafe + "\t" + "Grade: " + sb.getGrade());
+		System.out.println("Name: " + hp.getName() + "\t" + "ID: " + hp.getStudentID() + "\t" + "GAFE: " + hpGafe + "\t" + "Grade: " + hp.getGrade());
+		System.out.println();
+		
+		//Add up the grades to get the total
+		int total = sw.getGrade()+hd.getGrade()+pc.getGrade()+sb.getGrade()+hp.getGrade();
+		System.out.println("Total: " + total);
+		
+		//Divide the total by number of students, 5, to get the average
+		double average = (double)total/5;
+		System.out.print("Average: ");
+		System.out.printf("%.02f", average);
+		System.out.println("\n");
+		//Add up the squares of the distances from grades to the averaage, then divide by 5 to get the variance
+		double variance = (Math.pow(Math.abs(sw.getGrade()-average), 2) + Math.pow(Math.abs(hd.getGrade()-average), 2) + Math.pow(Math.abs(pc.getGrade()-average), 2) + Math.pow(Math.abs(sb.getGrade()-average), 2) + Math.pow(Math.abs(hp.getGrade()-average), 2))/5;
+		System.out.print("Variance: ");
+		System.out.printf("%.02f", variance);
+		System.out.println();
+		//Take the square root of the variance to get the standard deviation
+		double stddev = Math.sqrt(variance);
+		System.out.print("Standard deviation: ");
+		System.out.printf("%.02f", stddev);
+		
+	}
+}

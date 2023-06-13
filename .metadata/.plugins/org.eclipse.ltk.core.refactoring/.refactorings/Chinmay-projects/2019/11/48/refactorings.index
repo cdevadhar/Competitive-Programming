@@ -1,0 +1,4 @@
+1574908257922	Move member 'CHECKING'
+1574908298574	Move member 'SAVING'
+1574910050172	Extract method 'isChecking'
+1574970774181	Extract method 'oldWay'

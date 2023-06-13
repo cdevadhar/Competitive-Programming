@@ -1,0 +1,18 @@
+import java.io.*;
+import java.util.*;
+public class SwapitySwap {
+	static int n, m, k;
+	static int[] cows;
+	static Scanner in;
+	
+	public static void main(String[] args) {
+		in = new Scanner(System.in);
+		n = in.nextInt();
+		m = in.nextInt();
+		k = in.nextInt();
+		cows = new int[n];
+		for (int i=0; i<n; i++) {
+			cows[i] = i;
+		}
+	}
+}

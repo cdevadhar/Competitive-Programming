@@ -1,0 +1,58 @@
+
+public class Node {
+	int value;
+	Node next;
+	public Node(int value) {
+		this.value = value;
+	}
+	
+	public void addToTail(int value) {
+		Node end = new Node(value);
+		Node n = this;
+		while (n.next != null) {
+			n = n.next;
+		}
+		n.next = end;
+	}
+	
+	private static void displayList(Node currentNode) {
+		while (currentNode != null) {
+			System.out.print(currentNode.value + " ");
+			currentNode = currentNode.next;
+		}
+		System.out.println("------");
+	}
+	public Node deleteNode(Node head, int key) {
+		Node n = head;
+		if (n.value == key) {
+			return head.next;
+		}
+		while(n.next!= null) {
+			if (n.next.value == key) {
+				n.next = n.next.next;
+				return head;
+			}
+			n = n.next;
+		}
+		return head;
+	}
+	public static void main(String[] args) {
+		Node list1 = new Node(5);
+		list1.addToTail(6);
+		
+		Node list2 = new Node(4);
+		list2.addToTail(3);
+		list2.addToTail(7);
+		
+		displayList(list1);
+		displayList(list2);
+		
+		list2.deleteNode(list2, 3);
+		displayList(list2);
+		
+		
+	}
+	
+	
+
+}

@@ -1,0 +1,13 @@
+import java.util.Scanner;
+
+public class HangMan {
+	public static void main(String[] args) {
+		Scanner wordInput = new Scanner(System.in);
+		String wordyWord = wordInput.next();
+		wordInput.close();
+		for (int i=0; i<wordyWord.length(); i++) {
+			System.out.println("_ ")
+		}
+	}
+
+}

@@ -1,0 +1,41 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class HangMan {
+	
+	public ArrayList hideWord (String word) {
+		ArrayList<String> hiddenLetters = new ArrayList<String>();
+		for (int i=0; i<word.length(); i++) {
+			hiddenLetters.add(String.valueOf(word.charAt(1)));
+			System.out.println("- ");
+		}
+		return hiddenLetters;
+	}
+	
+	public static void main(String args[]){ 
+		 
+	    Scanner ss = new Scanner(System.in); 
+	 
+	    System.out.println("Enter Word."); 
+	    String x = ss.next();
+	    ArrayList wordToGuess = new HangMan().hideWord(x);
+//	    for (int i=0; i<x.length(); i++) {
+//			System.out.print("_ ");
+//		}
+//	    System.out.println();
+//	    boolean guessCorrect = false;
+//	    int livesLeft = 5;
+//	    while (guessCorrect == false || livesLeft>0) {
+//	    	System.out.print(">");
+//	    	String guess = ss.next();
+//	    	if (guess.length() == 1) {
+//	    		for (int i=0; i<x.length(); i++) {
+//	    			if (String.valueOf(x.charAt(i)) == guess) {
+//	    				System.out.println("Correct");
+//	    			}
+//	    		}
+//	    	}
+//	    }
+  } 
+
+}

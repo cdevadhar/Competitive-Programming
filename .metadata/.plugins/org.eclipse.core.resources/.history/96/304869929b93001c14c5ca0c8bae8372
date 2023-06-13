@@ -1,0 +1,91 @@
+import java.io.*;
+import java.util.*;
+public class Sokoban {
+	public static void main(String[] args) throws Exception {
+		FastIO in = new FastIO();
+		int t = in.nextInt();
+		for (int tc=0; tc<t; tc++) {
+			int n = in.nextInt();
+			int m = in.nextInt();
+			System.out.println(m);
+			int[] boxes = new int[n];
+			int[] positions = new int[m];
+			int division = -1;
+			int division2 = -1;
+			for (int i=0; i<n; i++) {
+				boxes[i] = in.nextInt();
+				if (division==-1 && boxes[i]>0) division = i;
+			}
+			for (int i=0; i<m; i++) {
+				positions[i] = in.nextInt();
+				if (division2==-1 && positions[i]>0) division2 = i;
+			}
+			int[] positiveBoxes = new int[n-division];
+			int[] positivePositions = new int[m-division2];
+			int[] negativePositions = new int[division2];
+			int[] negativeBoxes = new int[division];
+			int[] positiveSuffix = new int[m-division2+1];
+			for (int i=m-division2-1; i>=0; i--) {
+				positiveSuffix[i] = positiveSuffix[i+1];
+				if (Arrays.binarySearch(positiveBoxes, positivePositions[i])>=0) {
+					positiveSuffix[i]++;
+				}
+			}
+			int ans = 0;
+			for (int i=0; i<m; i++) {
+				int before = Arrays.binarySearch(positiveBoxes, positivePositions[i]);
+				if (before<0) {
+					before+=2;
+					before*=(-1);
+				}
+				int after = Arrays.binarySearch(positiveBoxes, positivePositions[i]+before);
+				if (after<0) {
+					after+=2;
+					after*=(-1);
+				}
+				int positionsBetween = Arrays.binarySearch(positivePositions, after)-i;
+				if (positionsBetween<0) {
+					positionsBetween+=2;
+					positionsBetween*=(-1);
+				}
+				ans = Math.max(ans, positionsBetween+positiveSuffix[i+positionsBetween-1]);
+			}
+			System.out.println(ans);
+		}
+	}
+	static class FastIO {
+		BufferedReader br;
+	    StringTokenizer st;
+	    public FastIO() throws IOException
+	    {
+	        br = new BufferedReader(
+	           new InputStreamReader(System.in));
+
+	    }
+	    
+
+	    public String next() throws IOException
+	    {
+	        while (st == null || !st.hasMoreElements()) {
+	           
+	            st = new StringTokenizer(br.readLine());
+	        }
+	        return st.nextToken();
+	    }
+
+	    public int nextInt() throws NumberFormatException, IOException { return Integer.parseInt(next()); }
+
+	    public long nextLong() throws NumberFormatException, IOException { return Long.parseLong(next()); }
+
+	    public double nextDouble() throws NumberFormatException, IOException
+	    {
+	        return Double.parseDouble(next());
+	    }
+
+	    public String nextLine() throws IOException
+	    {
+	        String str = br.readLine();
+	        return str;
+	    }
+	}
+}

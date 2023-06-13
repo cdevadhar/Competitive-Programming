@@ -1,0 +1,13 @@
+
+public class WinTrack {
+	private Team teamToTrack;
+	private int numberOfWins;
+	public WinTrack(Team teamToTrack, int numberOfWins) {
+		this.teamToTrack = teamToTrack;
+		this.numberOfWins = numberOfWins;
+	}
+	public String toString() {
+		return teamToTrack + ": " + numberOfWins + " wins";
+	}
+
+}

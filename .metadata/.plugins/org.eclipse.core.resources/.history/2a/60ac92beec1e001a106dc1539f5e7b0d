@@ -1,0 +1,58 @@
+import java.util.ArrayList;
+
+public class Tournament {
+	private DebateClub hostClub;
+	private String tournamentName;
+	private int date;
+	private ArrayList<Team> competitors;
+	private ArrayList<Round> rounds;
+	public Tournament(DebateClub hostClub, String tournamentName, int date) {
+		competitors = new ArrayList<Team>(64);
+		rounds = new ArrayList<Round>();
+		this.hostClub = hostClub;
+		this.tournamentName = tournamentName;
+		this.date = date;
+	}
+	public void addTeam(Team debaters) {
+		competitors.add(debaters);
+	}
+	public void createRound(int i) {
+		Round round = new Round(i, this.competitors);
+		rounds.add(round);
+		
+	}
+	public String toString() {
+		return "Tournament: " + tournamentName + " held by " + hostClub.getName() + competitors;
+	}
+	public static void main(String[] args) {
+		DebateClub SCUDebate = new DebateClub("SCUDebate");
+
+		DebateClub WhsDebate = new DebateClub("WhsDebate");
+		
+		Student Chinmay = new Student("Chinmay Devadhar", 9, WhsDebate);
+		Student Tharun = new Student("Tharun Sankar", 9, WhsDebate);
+		
+		Team WashingtonDevadharSankar = new Team(Chinmay, Tharun, "Washington DL");
+		
+		DebateClub IhsDebate = new DebateClub("IhsDebate");
+		
+		Student Joe = new Student("Joe Mama", 9, IhsDebate);
+		Student Steve = new Student("Steve Mama", 9, IhsDebate);
+		
+		Team IrvingtonMamaMama = new Team(Joe, Steve, "Irvington MM");
+		
+		ArrayList<Team> teams = new ArrayList<Team>();
+		teams.add(WashingtonDevadharSankar);
+		teams.add(IrvingtonMamaMama);
+		
+		Tournament scuTourney = new Tournament(SCUDebate, "Dempsey-Cronin Inv.", 22);
+		
+		for (Team team : teams) {
+			scuTourney.addTeam(team);
+		}
+		scuTourney.createRound(1);
+		System.out.println(scuTourney);
+		
+	}
+
+}

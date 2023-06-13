@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;chinmay_apcs&apos;&#x0A;- Original project: &apos;chinmay_apcs&apos;&#x0A;- Original element: &apos;chinmay_apcs/src/labs_projects.classes&apos;&#x0A;- Delete subpackages" description="Delete element" element1="/src&lt;labs_projects.classes.doc.resources" element2="/src&lt;labs_projects.classes.doc" element3="/src&lt;labs_projects.classes" elements="3" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1645757302309" subPackages="true" version="1.0"/>
+</session>

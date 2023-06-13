@@ -1,0 +1,78 @@
+import java.util.ArrayList;
+
+public class Genetics3 {
+
+	class Animal2 {
+		public int xcoor;
+		public int ycoor;
+		public Brain brain;
+		public double distanceToTarget;
+		public Animal2(int xcoor, int ycoor, Brain brain) {
+			this.xcoor = xcoor;
+			this.ycoor = ycoor;
+			this.brain = brain;
+		}
+		public void updateCoors(Animal2 animal2) {
+			// TODO Auto-generated method stub
+			animal2.xcoor = 0;
+			animal2.ycoor = 0;
+			for (int i=0; i<animal2.brain.size; i++) {
+//				if (animal.xcoor>10 || animal.ycoor>10 || animal.xcoor<-10 || animal.ycoor <-10) {
+//					System.out.println("This animal went out of bounds and was eaten.");
+//					System.out.println("It took " + i + " moves to die.");
+//					return;
+//				}
+				if (animal2.brain.directions.get(i).equals(0)) {
+					animal2.xcoor -=1;
+//					System.out.println("(" + animal.xcoor + ", " + animal.ycoor + ")");
+				}
+				else if (animal2.brain.directions.get(i).equals(1)) {
+					animal2.xcoor +=1;
+//					System.out.println("(" + animal.xcoor + ", " + animal.ycoor + ")");
+				}
+				else if (animal2.brain.directions.get(i).equals(2)) {
+					animal2.ycoor +=1;
+//					System.out.println("(" + animal.xcoor + ", " + animal.ycoor + ")");
+				}
+				else if (animal2.brain.directions.get(i).equals(3)) {
+					animal2.ycoor -=1;
+//					System.out.println("(" + animal.xcoor + ", " + animal.ycoor + ")");
+				}
+				
+			}
+			
+		}
+		
+	}
+	public ArrayList<Animal2> makePop(int popSize) {
+		ArrayList<Animal2> population = new ArrayList<Animal2>();
+		for (int i=0; i<popSize; i++) {
+			population.add(new Animal2(0, 0, new Brain(1)));
+			population.get(i).updateCoors(population.get(i));
+		}
+		return population;
+	}
+	
+	public ArrayList<Animal2> makeNewGen(ArrayList<Animal2> originalPop, int targetx, int targety) {
+		ArrayList<Animal2> nextGenParents = new ArrayList<Animal2>();
+		ArrayList<Animal2> nextGen = new ArrayList<Animal2>();
+		double sum = 0;
+		for (int i=0; i<originalPop.size(); i++) {
+			originalPop.get(i).distanceToTarget = Math.sqrt((originalPop.get(i).xcoor-targetx)*(originalPop.get(i).xcoor-targetx) + (originalPop.get(i).ycoor-targety)*(originalPop.get(i).ycoor-targety));
+			sum += originalPop.get(i).distanceToTarget;
+		}
+		double averageDistance = sum/(double) originalPop.size();
+		for (int i=0; i<originalPop.size(); i++) {
+			if 
+		}
+	}
+	
+	public static void main(String[] args) {
+		Genetics3 test = new Genetics3();
+		ArrayList<Animal2> firstGen = test.makePop(50);
+		for (int i=0; i<firstGen.size(); i++) {
+			System.out.println("(" + firstGen.get(i).xcoor + ", " + firstGen.get(i).ycoor + ")");
+		}
+	}
+	
+}

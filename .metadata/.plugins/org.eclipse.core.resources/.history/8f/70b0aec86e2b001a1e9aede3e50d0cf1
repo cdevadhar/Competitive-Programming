@@ -1,0 +1,75 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Tournament {
+	private DebateClub hostClub;
+	private String tournamentName;
+	private int date;
+	private ArrayList<Team> competitors;
+	private ArrayList<Round> rounds;
+	public Tournament(DebateClub hostClub, String tournamentName, int date) {
+		competitors = new ArrayList<Team>(64);
+		rounds = new ArrayList<Round>();
+		this.hostClub = hostClub;
+		this.tournamentName = tournamentName;
+		this.date = date;
+	}
+	public void addTeam(Team debaters) {
+		competitors.add(debaters);
+	}
+	public ArrayList<Round> createRounds(int maxRounds) {
+		ArrayList<Match> previousmatches = new ArrayList<Match>();
+		for (int i=0; i<maxRounds; i++) {
+			Round round = new Round(i, this.competitors, previousmatches);
+			rounds.add(round);
+			previousmatches.addAll(round.getMatches());
+		}
+		return rounds;
+	}
+	public void winsCount(ArrayList<Team> winners) {
+		ArrayList<Integer> allTeamWins = new ArrayList<Integer>();
+		for (Team team: this.competitors) {
+			ArrayList<Team> winTracker = new ArrayList<Team>();
+			int numberOfWins = 0;
+			
+			for (Round round: rounds) {
+				for (Match match: round.getMatches()) {
+					if (team == match.getWinner()) {
+						winTracker.add(team);
+					}
+				}
+			}
+			numberOfWins += winTracker.size();
+			allTeamWins.add(numberOfWins);
+			
+		}
+		Collections.sort(allTeamWins, Collections.reverseOrder());
+		System.out.println(allTeamWins);
+	}
+	
+	public String toString() {
+		return "Tournament: " + tournamentName + " held by " + hostClub.getName() + competitors;
+	}
+	public static void main(String[] args) {
+		DebateClub SCUDebate = new DebateClub("SCUDebate");
+
+		Tournament scuTourney = new Tournament(SCUDebate, "Dempsey-Cronin Inv.", 22);
+		
+		ArrayList<Team> teams = Round.createTestTeams();
+		
+		for (Team team : teams) {
+			scuTourney.addTeam(team);
+		}
+		
+		ArrayList<Round> allRounds = scuTourney.createRounds(5);
+		
+		System.out.println(scuTourney.rounds);
+		for (Round round: allRounds) {
+			round.play();
+		}
+		scuTourney.winsCount(teams);
+		
+		
+	}
+
+}

@@ -1,0 +1,19 @@
+
+public class ReplaceSpace {
+	public void replaceSpace(String spaceString) {
+		char[] withSpace = spaceString.toCharArray();
+		for (int i = 0; i<withSpace.length; i++) {
+			if (withSpace[i] == ' ') {
+				withSpace[i] = 'a';
+			}
+			
+		}
+		System.out.println(withSpace);
+	}
+	public static void main(String[] args) {
+		String test = "My name is Chinmay";
+		ReplaceSpace tester = new ReplaceSpace();
+		tester.replaceSpace(test);
+	}
+
+}

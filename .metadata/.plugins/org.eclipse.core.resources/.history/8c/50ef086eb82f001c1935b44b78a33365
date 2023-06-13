@@ -1,0 +1,29 @@
+package labs_projects;
+
+public class Craps {
+	public static void main(String[] args) {
+		int die1, die2;
+		int losses = 0;
+		int wins = 0;
+		for (int i=0; i<100000; i++) {
+			die1 = (int) (Math.random()*6+1);
+			die2 = (int) (Math.random()*6+1);
+			int sum = die1+die2;
+			if (sum==2 || sum==3 || sum==12) losses++;
+			if (sum==7 || sum==11) wins++;
+			else {
+				int currSum = -1;
+				while (currSum!=sum && currSum!=7) {
+					die1 = (int) (Math.random()*6+1);
+					die2 = (int) (Math.random()*6+1);
+					currSum = die1+die2;
+				}
+				if (currSum==7) losses++;
+				else wins++;
+			}
+		}
+		System.out.println((double)wins/10000);
+		
+		
+	}
+}

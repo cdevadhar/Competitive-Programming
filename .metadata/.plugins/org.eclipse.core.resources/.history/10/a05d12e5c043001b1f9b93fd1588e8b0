@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+public class ABCs {
+
+	public void findABCs(ArrayList<Integer> numbers, int a) {
+		int max = Collections.max(numbers);
+		ArrayList<ABC> possibleABCs = new ArrayList<ABC>();
+		for (int i=0; i<numbers.size(); i++) {
+			for (int j=i+1; j<numbers.size(); j++) {
+				for (int k=j+1; k<numbers.size(); k++) {
+					if (numbers.get(i) + numbers.get(j)+ numbers.get(k)==max) {
+						ABC possibleABC = new ABC(numbers.get(i), numbers.get(j), numbers.get(k));
+					}
+				}
+			}
+		}
+	}
+	
+
+
+	public static void main (String[] args) {
+		Scanner scan = new Scanner(System.in);
+		ArrayList<Integer> numbers = new ArrayList<Integer>();
+		for (int i=0; i<7; i++) {
+			int a = scan.nextInt();
+			
+			numbers.add(a);
+		}
+		
+		
+	}
+}
+class ABC {
+	int A;
+	int B;
+	int C;
+	
+	public ABC(int A, int B, int C) {
+		this.A = A;
+		this.B = B;
+		this.C = C;
+	}
+}

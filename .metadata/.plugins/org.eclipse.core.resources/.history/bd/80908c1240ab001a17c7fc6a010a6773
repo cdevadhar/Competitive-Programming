@@ -1,0 +1,165 @@
+import java.util.ArrayList;
+import java.util.*;
+
+/**
+ * This is a class that models a linked list of integers. This was built to solve the problems around 
+ * linked list in Cracking the Coding Interview book;
+ * @author chinmaydevadhar
+ *
+ */
+public class Node {
+	/**
+	 * The data we are storing at the current node
+	 */
+	int value;
+	/**
+	 * Pointer to the next node.
+	 */
+	Node next;
+	
+	public Node(int value) {
+		this.value = value;
+	}
+
+	/**
+	 * Adds a value to the tail of a linked list. 
+	 * @param value the data that we are trying to add to the linked list
+	 */
+	public void addToTail(int value) {
+		Node end = new Node(value);
+		Node n = this;
+		while (n.next != null) {
+			n = n.next;
+		}
+		n.next = end;
+	}
+
+	private static void displayList(Node currentNode) {
+		while (currentNode != null) {
+			System.out.print(currentNode.value + " ");
+			currentNode = currentNode.next;
+		}
+		System.out.println("------");
+	}
+	public Node deleteNode(Node head, int key) {
+		Node n = head;
+		if (n.value == key) {
+			return head.next;
+		}
+		while(n.next!= null) {
+			if (n.next.value == key) {
+				n.next = n.next.next;
+				return head;
+			}
+			n = n.next;
+		}
+		return head;
+	}
+	public Node deleteDuplicates(Node head) {
+		Node current = head;
+		ArrayList<Integer> alreadySeen = new ArrayList<Integer>();
+		alreadySeen.add(head.value);
+		while(current.next !=null) {
+			System.out.println("**** n.val=" + current.value);
+			if (current.next != null) System.out.println("**** n.next.val=" + current.next.value);
+			else System.out.println("**** n.next.val=" + current.next);
+
+			if (alreadySeen.contains(current.next.value)) {
+				System.out.println("***** Already seen value : " + current.next.value);
+				current.next = current.next.next;
+			}
+			else {
+				System.out.println("***** New value : " + current.next.value);
+				alreadySeen.add(current.next.value);
+				current = current.next;
+
+			}
+			
+		}
+
+		return head;
+
+	}
+	/**
+	 * Finds the element at a distance of 'numtoLast' from the end.
+	 * Makes a copy of the linked list and reverses it.
+	 * 
+	 * @param numtolast
+	 * @param head
+	 * @return
+	 */
+	public int getElement(int numtolast, Node head) {
+		Node current  = head;
+		ArrayList <Integer> values = new ArrayList<Integer>();
+		values.add(head.value);
+		while(current.next != null) {
+			values.add(current.next.value);
+			current = current.next;
+		}
+		Collections.reverse(values);
+		
+		int returnval = values.get(numtolast-1);
+		return returnval;
+	}
+	
+	public int getElementFromLast(int numtolast, Node head) {
+		Node current  = head;
+		int count = 0;
+		while(current.next!=null) {
+			count +=1;
+			current = current.next;
+		}
+		current = head;
+		for (int i = 0; i < count - numtolast + 1 ; i++) 
+            current = current.next; 
+  
+        return current.value; 
+		
+	}
+	
+	public void deleteFromMiddle(Node c) {
+		c.value = c.next.value;
+		c.next = c.next.next;
+	}
+
+	public static void main(String[] args) {
+		Node list1 = new Node(5);
+		list1.addToTail(6);
+
+		Node list2 = new Node(4);
+		list2.addToTail(3);
+		list2.addToTail(7);
+
+		displayList(list1);
+		displayList(list2);
+
+		list2.deleteNode(list2, 3);
+		displayList(list2);
+
+		
+		Node list3 = new Node(4);
+		list3.addToTail(4);
+		list3.addToTail(3);
+		list3.addToTail(3);
+		list3.addToTail(5);
+		list3.addToTail(5);
+		list3.addToTail(4);
+		list3.addToTail(4);
+		list3.addToTail(7);
+		list3.addToTail(4);
+		list3.addToTail(4);
+
+		displayList(list3);
+
+		list2.deleteDuplicates(list3);
+		displayList(list3);
+		
+		System.out.println(list3.getElementFromLast(4, list3));
+
+
+
+	}
+
+
+
+}

@@ -1,0 +1,23 @@
+
+public class WinTrack implements Comparable {
+	private Team teamToTrack;
+	private int numberOfWins;
+	public WinTrack(Team teamToTrack, int numberOfWins) {
+		this.teamToTrack = teamToTrack;
+		this.numberOfWins = numberOfWins;
+	}
+	public String toString() {
+		return teamToTrack + " has " + numberOfWins + " wins";
+	}
+	public int getNumberOfWins() {
+		return numberOfWins;
+	}
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		int compareNumWins = ((WinTrack)o).getNumberOfWins();
+		return this.numberOfWins-compareNumWins;
+	}
+
+
+}

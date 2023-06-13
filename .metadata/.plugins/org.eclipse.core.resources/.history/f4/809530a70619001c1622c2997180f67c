@@ -1,0 +1,77 @@
+import java.io.*;
+import java.util.*;
+
+public class Jury {
+	static int mod = 998244353;
+	public static void main(String[] args) throws Exception{
+		FastIO in = new FastIO();
+		int t = in.nextInt();
+		for (int i=0; i<t; i++) {
+			int n = in.nextInt();
+			int[] jury = new int[n];
+			int max1 = 0;
+			int max2 = 0;
+			int max2Occurences = 0;
+			for (int j=0; j<n; j++) {
+				int tasks = in.nextInt();
+				if (tasks>max1) max1 = tasks;
+				else if (tasks>max2) {
+					max2 = tasks;
+					max2Occurences = 1;
+				}
+				else if (tasks==max2) {
+					max2Occurences++;
+				}
+				long ans = ((modFactorial(n)*modFactorial(max2Occurences))/modFactorial(max2Occurences+1))%mod;
+				System.out.println(mod);
+				
+			}
+		}
+		
+	}
+	public static long modFactorial(int n) {
+		int curr = 1;
+		long factorial = 1;
+		while (curr<=n) {
+			factorial = factorial*(curr%mod);
+			factorial%=mod;
+			curr++;
+		}
+		return factorial;
+	}
+	static class FastIO {
+		BufferedReader br;
+	    StringTokenizer st;
+	    public FastIO() throws IOException
+	    {
+	        br = new BufferedReader(
+	            new InputStreamReader(System.in));
+
+	    }
+	    
+
+	    public String next() throws IOException
+	    {
+	        while (st == null || !st.hasMoreElements()) {
+	           
+	            st = new StringTokenizer(br.readLine());
+	        }
+	        return st.nextToken();
+	    }
+
+	    public int nextInt() throws NumberFormatException, IOException { return Integer.parseInt(next()); }
+
+	    public long nextLong() throws NumberFormatException, IOException { return Long.parseLong(next()); }
+
+	    public double nextDouble() throws NumberFormatException, IOException
+	    {
+	        return Double.parseDouble(next());
+	    }
+
+	    public String nextLine() throws IOException
+	    {
+	        String str = br.readLine();
+	        return str;
+	    }
+	}
+}

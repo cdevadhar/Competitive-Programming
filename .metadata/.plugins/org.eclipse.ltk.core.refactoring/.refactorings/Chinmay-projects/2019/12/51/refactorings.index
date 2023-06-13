@@ -1,0 +1,5 @@
+1576380093440	Extract local variable 'team1'
+1576380115547	Extract local variable 'team2'
+1576381162411	Extract method 'createTeams'
+1576381255098	Extract local variable 'teams'
+1576381336210	Rename method 'createTeams'

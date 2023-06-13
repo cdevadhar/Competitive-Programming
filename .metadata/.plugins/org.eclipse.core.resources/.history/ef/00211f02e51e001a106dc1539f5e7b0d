@@ -1,0 +1,6 @@
+
+public class Round {
+	private int roundNumber;
+	private ArrayList<Match> matches;
+
+}

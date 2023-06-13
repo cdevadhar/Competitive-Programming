@@ -1,0 +1,114 @@
+import java.io.*;
+import java.util.*;
+
+public class ArrayGame {
+	static int[] leftIncreasing, rightIncreasing, arr;
+	public static void main(String[] args) throws Exception {
+		FastIO in = new FastIO();
+		int n = in.nextInt();
+		arr = new int[n];
+		leftIncreasing = new int[n];
+		rightIncreasing = new int[n];
+		for (int i=0; i<n; i++) {
+			arr[i] = in.nextInt();
+		}
+		int streak = 0;
+		for (int i=1; i<n; i++) {
+			if (arr[i]>arr[i-1]) {
+				streak++;
+			}
+			else {
+				for (int j=i-streak; j<i; j++) {
+					rightIncreasing[j] = streak-j;
+				}
+				streak = 0;
+			}
+		}
+		streak = 0;
+		for (int i=n-2; i>=0; i--) {
+			if (arr[i]>arr[i+1]) {
+				streak++;
+			}
+			else {
+				for (int j=i+streak; j>i; j--) {
+					leftIncreasing[j] = streak;
+					streak--;
+				}
+				streak = 0;
+			}
+		}
+		
+		
+	}
+	public static int solve(int left, int right, int prev, int turns) {
+		if (arr[left]<=prev && arr[right]<=prev) {
+			return turns;
+		}
+		if (arr[left]>prev && arr[right]<=prev) {
+			if (rightIncreasing[left]%2==0) {
+				return turns+1;
+			}
+			else return turns;
+		}
+		if (arr[right]>prev && arr[left]<=prev) {
+			if (leftIncreasing[right]%2==0) {
+				return turns+1;
+			}
+			else return turns;
+		}
+		else {
+			if (arr[right]>arr[left]) {
+				if (leftIncreasing[right]%2==0) {
+					return turns+1;
+				}
+				else {
+					solve(left+1, right, arr[left], turns+1);
+				}
+			}
+			else {
+				if (rightIncreasing[left]%2==0) {
+					return turns+1;
+				}
+				else {
+					solve(left, right-1, arr[right], turns+1);
+				}
+			}
+		}
+		return turns;
+	}
+	static class FastIO {
+		BufferedReader br;
+	    StringTokenizer st;
+	    public FastIO() throws IOException
+	    {
+	        br = new BufferedReader(
+	           new InputStreamReader(System.in));
+
+	    }
+	    
+
+	    public String next() throws IOException
+	    {
+	        while (st == null || !st.hasMoreElements()) {
+	           
+	            st = new StringTokenizer(br.readLine());
+	        }
+	        return st.nextToken();
+	    }
+
+	    public int nextInt() throws NumberFormatException, IOException { return Integer.parseInt(next()); }
+
+	    public long nextLong() throws NumberFormatException, IOException { return Long.parseLong(next()); }
+
+	    public double nextDouble() throws NumberFormatException, IOException
+	    {
+	        return Double.parseDouble(next());
+	    }
+
+	    public String nextLine() throws IOException
+	    {
+	        String str = br.readLine();
+	        return str;
+	    }
+	}
+}

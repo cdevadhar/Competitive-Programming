@@ -1,0 +1,16 @@
+package labs_projects;
+
+public class Unit2 {
+	public static void main(String[] args) {
+		Student sw = new Student("Snow White", 1001);
+		Student hd = new Student("Humpty Dumpty", 10012);
+		Student pc = new Student("Prince Charming", 10023);
+		Student sb = new Student("Sleeping Beauty", 1004, 90);
+		Student hp = new Student("Henny Penny", 1005, 80);
+		System.out.println("Name: " + sw.getName() +"      ID: " + sw.getStudentID() + "     Grade: " + sw.getGrade());
+		System.out.println("Name: " + hd.getName() +"    ID: " + hd.getStudentID() + "     Grade: " + hd.getGrade());
+		System.out.println("Name: " + pc.getName() +"    ID: " + pc.getStudentID() + "     Grade: " + pc.getGrade());
+		System.out.println("Name: " + sb.getName() +"    ID: " + sb.getStudentID() + "     Grade: " + sb.getGrade());
+		System.out.println("Name: " + hp.getName() +"    ID: " + hp.getStudentID() + "     Grade: " + hp.getGrade());
+	}
+}

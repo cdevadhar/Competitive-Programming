@@ -1,0 +1,71 @@
+import java.io.*;
+import java.util.*;
+public class YearofCow {
+	static int n, k;
+	static int[] ancestors;
+	static ArrayList<Jump> jumps;
+	static Scanner in;
+	public static void main(String[] args) {
+		in = new Scanner(System.in);
+		n = in.nextInt();
+		k = in.nextInt();
+		ancestors = new int[n+1];
+		for (int i=0; i<n; i++) {
+			ancestors[i] = -1*in.nextInt();
+		}
+		Arrays.parallelSort(ancestors);
+		ancestors[n] = 0;
+		int[] closestPortalsBefore = new int[n];
+		int[] closestPortalsAfter = new int[n];
+		for (int i=0; i<n; i++) {
+			closestPortalsBefore[i] = ancestors[i]- (12+ancestors[i]%12);
+			closestPortalsAfter[i] = ancestors[i]- ancestors[i]%12;
+			
+		}
+		jumps = new ArrayList<Jump>();
+		Jump jump = new Jump(0, ancestors[0]);
+		jumps.add(jump);
+		for (int i=1; i<n+1; i++) {
+			
+			jumps.add(new Jump(ancestors[i], ancestors[i-1]));
+		}
+		Collections.sort(jumps);
+//		Collections.reverse(jumps);
+//		for (int i=0; i<jumps.size(); i++) {
+//			System.out.println(jumps.get(i).distance);
+//		}
+		System.out.println(timeNeeded());
+		
+	}
+	
+	public static int timeNeeded() {
+		int time=0;
+		for (int i=0; i<n-k+1; i++) {
+			time+=jumps.get(i).distance;
+		}
+//		for (int i=n-k+1; i<n+1; i++) {
+//			int waitA = jumps.get(i).x - jumps.get(i).x%12;
+//			int waitB = jumps.get(i).y - (12+ jumps.get(i).y%12);
+//			time +=(waitA+waitB);
+//		}
+		
+		return time;
+	}
+	
+
+}
+
+class Jump implements Comparable<Jump>{
+	int x, y;
+	int distance;
+	public Jump(int x, int y) {
+		this.x = x;
+		this.y = y;
+		distance = Math.abs(x-y);
+	}
+	@Override
+	public int compareTo(Jump o) {
+		// TODO Auto-generated method stub
+		return Integer.compare(distance, o.distance);
+	}
+}

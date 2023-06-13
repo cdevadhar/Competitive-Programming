@@ -1,0 +1,90 @@
+import java.io.*;
+import java.util.*;
+public class CowPairs {
+	static int n;
+	static ArrayList<Integer> cowtimes;
+	static ArrayList<Pair> times;
+	static Scanner in;
+	public static void main(String[] args) {
+		in = new Scanner(System.in);
+		n = in.nextInt();
+//		cowtimes = new ArrayList<Integer>();
+		times = new ArrayList<Pair>();
+		for (int i=0; i<n; i++) {
+			int a = in.nextInt();
+			int b = in.nextInt();
+//			for (int j=0; j<a; j++) {
+//				cowtimes.add(b);
+//			}
+			Pair pair = new Pair(a, b);
+			times.add(pair);
+			
+		}
+//		Collections.sort(cowtimes);
+		Collections.sort(times);
+		for (int i=0; i<n; i++) {
+			System.out.println(times.get(i).x + " " + times.get(i).y);
+		}
+		System.out.println(times.size());
+//		minTime2();
+		
+		
+	}
+	
+	public static void minTime() {
+		int max=0;
+		for (int i=0; i<cowtimes.size(); i++) {
+			int time = cowtimes.get(i) + cowtimes.get(cowtimes.size()-i-1);
+			if (time>max) max = time;
+		}
+		System.out.println(max);
+	}
+	
+	public static void minTime2() {
+		int high = n-1;
+		int low = 0;
+		int max=0;
+		while(high>=low) {
+			System.out.println(times.get(low).x + " " + times.get(high).x);
+			int m = Integer.min(times.get(low).x, times.get(high).x);
+			System.out.println(m);
+			System.out.println(high + " " + low);
+			if (m==times.get(low).x) {
+//				times.remove(low);
+				int x = times.get(low).y+times.get(high).y;
+				System.out.println(x);
+				if (x>max) max = x;
+				times.get(high).x-=times.get(low).x;
+				low++;
+				if (times.get(high).x==0) high--;
+			}
+			else {
+//				times.remove(high);
+				int x = times.get(low).y+times.get(high).y;
+				System.out.println(x);
+				if (x>max) max = x;
+				times.get(low).x-=times.get(high).x;
+				high--;
+				if (times.get(low).x==0) low++;
+			}
+			if (high==low) {
+				
+			}
+		}
+		System.out.println(max);
+	}
+}
+
+class Pair implements Comparable<Pair>{
+	int x, y;
+	public Pair(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	@Override
+	public int compareTo(Pair o) {
+		// TODO Auto-generated method stub
+		return Integer.compare(y, o.y);
+	}
+}
+

@@ -1,0 +1,20 @@
+
+public class IsRotation {
+	public boolean checkSubstring(String s1, String s2) {
+		if (s1.contains(s2)) {
+			return true;
+		}
+		if (s2.contains(s1)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isRotation(String s1, String s2) {
+		
+	}
+	public static void main(String[]args) {
+		IsRotation tester = new IsRotation();
+		System.out.println(tester.checkSubstring("racecar", "car"));
+	}
+}

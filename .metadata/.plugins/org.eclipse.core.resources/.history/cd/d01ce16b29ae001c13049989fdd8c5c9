@@ -1,0 +1,90 @@
+import java.io.*;
+import java.util.*;
+public class Visits2 {
+	static int n;
+	static long[] v;
+	static int[] a;
+	static boolean[] visited, cycle;
+	static int cycles;
+	public static void main(String[] args) throws Exception {
+		FastIO in = new FastIO();
+		int n = in.nextInt();
+		v = new long[n];
+		a = new int[n];
+		for (int i=0; i<n; i++) {
+			a[i] = in.nextInt();
+			v[i] = in.nextLong();
+		}
+		visited = new boolean[n];
+		cycle = new boolean[n];
+		cycles = 0;
+		for (int i=0; i<n; i++) {
+			if (!visited[i]) {
+				dfs(i);
+			}
+		}
+		ArrayList<Long> cycleNodes = new ArrayList<Long>();
+		for (int i=0; i<n; i++) {
+			if (cycle[i])  cycleNodes.add(v[i]);
+		}
+		Collections.sort(cycleNodes);
+		long removed = 0;
+		for (int i=0; i<cycles; i++) {
+			removed+=cycleNodes.get(i);
+		}
+	}
+	public static void dfs(int node) {
+		if (visited[node]) {
+			if (cycle[node]) return;
+			else {
+				cycles++;
+				cycle[node] = true;
+				dfs2(a[node], node);
+				return;
+			}
+		}
+		visited[node] = true;
+		dfs(a[node]);
+	}
+	public static void dfs2(int node, int src) {
+		if (node==src) return;
+		cycle[node] = true;
+		dfs2(a[node], src);
+	}
+	static class FastIO {
+		BufferedReader br;
+	    StringTokenizer st;
+	    PrintWriter pr;
+	    public FastIO() throws IOException
+	    {
+	        br = new BufferedReader(
+	           new InputStreamReader(System.in));
+	        pr = new PrintWriter(System.out);
+	    }
+	    
+
+	    public String next() throws IOException
+	    {
+	        while (st == null || !st.hasMoreElements()) {
+	           
+	            st = new StringTokenizer(br.readLine());
+	        }
+	        return st.nextToken();
+	    }
+
+	    public int nextInt() throws NumberFormatException, IOException { return Integer.parseInt(next()); }
+
+	    public long nextLong() throws NumberFormatException, IOException { return Long.parseLong(next()); }
+
+	    public double nextDouble() throws NumberFormatException, IOException
+	    {
+	        return Double.parseDouble(next());
+	    }
+
+	    public String nextLine() throws IOException
+	    {
+	        String str = br.readLine();
+	        return str;
+	    }
+	}
+}

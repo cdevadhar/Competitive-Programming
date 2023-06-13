@@ -1,0 +1,77 @@
+package labs_projects;
+
+import java.util.Scanner;
+
+public class GuessingGame {
+	static Scanner in;
+	public static void main(String[] args) {
+		in = new Scanner(System.in);
+		System.out.println("Is it a land animal?");
+		String curr = in.next();
+		if (curr.toLowerCase().contentEquals("yes")) {
+			System.out.println("Is it a mammal?");
+			curr = in.next();
+			if (curr.toLowerCase().contentEquals("yes")) {
+				System.out.println("Is it a predator?");
+				curr = in.next();
+				if (curr.toLowerCase().contentEquals("yes")) {
+					System.out.println("Is it a feline?");
+					curr = in.next();
+					if (curr.toLowerCase().contentEquals("yes")) {
+						
+						System.out.println("Is it bigger than a German Shepherd?");
+						curr = in.next();
+						if (curr.toLowerCase().contentEquals("yes")) {
+							System.out.println("Is it a lion?");
+							curr = in.next();
+							if (curr.toLowerCase().contentEquals("yes")) System.out.println("Yay");
+							else System.out.println("Dnc bre");
+						}
+						else {
+							System.out.println("Is it a housecat?");
+							curr = in.next();
+							if (curr.toLowerCase().contentEquals("yes")) System.out.println("Yay");
+							else System.out.println("Dnc bre");
+						}
+					}
+					else {
+						System.out.println("Is it a canine?");
+						curr = in.next();
+						if (curr.toLowerCase().contentEquals("yes")) {
+							System.out.println("Is it bigger than a dog?");
+							curr = in.next();
+							if (curr.toLowerCase().contentEquals("yes")) {
+								System.out.println("Is it a wolf");
+								curr = in.next();
+								if (curr.toLowerCase().contentEquals("yes")) System.out.println("Yay");
+								else System.out.println("Dnc");
+							}
+							else {
+								System.out.println("Is it a dog?");
+								curr = in.next();
+								if (curr.toLowerCase().contentEquals("yes")) System.out.println("Yay");
+								else System.out.println("Dnc");
+							}
+						}
+						else {
+							System.out.println("Is it a bear?");
+							curr = in.next();
+							if (curr.toLowerCase().contentEquals("yes")) System.out.println("Yay");
+							else System.out.println("Dnc bre");
+						}
+					}
+				}
+			}
+			
+      
+		}
+		else if (curr.toLowerCase().contentEquals("yes")) {
+			System.out.println("Is it a mammal?");
+			curr = in.next();
+
+		}
+    else {
+      System.out.println("You're too much of a dumbass to play this game. Try playing slopegame.online or monkeytype or browse the jungle.");
+    }
+	}
+}

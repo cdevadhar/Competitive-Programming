@@ -1,0 +1,13 @@
+
+public class Tree {
+	private int value;
+	Tree leftChild;
+	Tree rightChild;
+	
+	public Tree(int value) {
+		this.value = value;
+	}
+	
+	
+
+}

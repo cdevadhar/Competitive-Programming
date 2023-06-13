@@ -1,0 +1,58 @@
+import java.io.*;
+import java.util.*;
+public class Rut {
+	
+	public void howMuchGrass(ArrayList<Cow> cows, Cow cow) {
+		ArrayList<Integer> intersections = new ArrayList<Integer>();
+		for (int j=0; j<cows.size(); j++) {
+			if (cow.direction.contentEquals(cows.get(j).direction)==false) {
+				if (cow.direction.contentEquals("N")) {
+					int intersectionx = cow.startingx;
+					int intersectiony = cows.get(j).startingy;
+					if (intersectionx-cows.get(j).startingx<intersectiony-cow.startingy) {
+						intersections.add(intersectiony-cow.startingy);
+					}
+				}
+				if (cow.direction.contentEquals("E")) {
+					int intersectiony = cow.startingy;
+					int intersectionx = cows.get(j).startingx;
+					if (intersectionx-cows.get(j).startingx<intersectiony-cow.startingy) {
+						intersections.add(intersectiony-cow.startingy);
+					}
+				}
+			}
+		}
+		for (int i=0; i<intersections.size(); i++) {
+			System.out.println(intersections.get(i));
+		}
+	}
+	
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		int N = scan.nextInt();
+		ArrayList<Cow> cows = new ArrayList<Cow>();
+		for (int i=0; i<N; i++) {
+			String direction = scan.next();
+			int x = scan.nextInt();
+			int y = scan.nextInt();
+			Cow cow = new Cow(direction, x, y);
+			cows.add(cow);
+		}
+		new Rut().howMuchGrass(cows, cows.get(1));
+	}
+}
+
+class Cow {
+	String direction;
+	int startingx;
+	int startingy;
+	int grassEaten = 0;
+	boolean moving = true;
+	public Cow(String direction, int startingx, int startingy) {
+		this.direction=direction;
+		this.startingx = startingx;
+		this.startingy = startingy;
+	}
+	
+}

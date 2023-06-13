@@ -1,0 +1,48 @@
+package labs_projects;
+
+public class Unit2 {
+	public static void main(String[] args) {
+		Student sw = new Student("Snow White", 1001);
+		Student hd = new Student("Humpty Dumpty", 10012);
+		Student pc = new Student("Prince Charming", 10023);
+		Student sb = new Student("Sleeping Beauty", 1004, 90);
+		Student hp = new Student("Henny Penny", 1005, 80);
+		System.out.println(sw);
+		System.out.println(hd);
+		System.out.println(pc);
+		System.out.println(sb);
+		System.out.println(hp);
+		String swGafe = (sw.getFirstName().substring(0, 3) + sw.getLastName().substring(0,3) + (sw.getStudentID()+"").substring((sw.getStudentID()+"").length()-3)).toLowerCase();
+		String hdGafe = (hd.getFirstName().substring(0, 3) + hd.getLastName().substring(0,3) + (hd.getStudentID()+"").substring((hd.getStudentID()+"").length()-3)).toLowerCase();
+		String pcGafe = (pc.getFirstName().substring(0, 3) + pc.getLastName().substring(0,3) + (pc.getStudentID()+"").substring((pc.getStudentID()+"").length()-3)).toLowerCase();
+		String sbGafe = (sb.getFirstName().substring(0, 3) + sb.getLastName().substring(0,3) + (sb.getStudentID()+"").substring((sb.getStudentID()+"").length()-3)).toLowerCase();
+		String hpGafe = (hp.getFirstName().substring(0, 3) + hp.getLastName().substring(0,3) + (hp.getStudentID()+"").substring((hp.getStudentID()+"").length()-3)).toLowerCase();
+		sw.setGrade((int)(Math.random()*101));
+		hd.setGrade((int)(Math.random()*101));
+		pc.setGrade((int)(Math.random()*101));
+		sb.setGrade((int)(Math.random()*101));
+		hp.setGrade((int)(Math.random()*101));
+		System.out.println();
+		System.out.println("Name: " + sw.getName() + "\t" + "ID: " + sw.getStudentID() + "\t" + "GAFE: " + swGafe + "\t" + "Grade: " + sw.getGrade());
+		System.out.println("Name: " + hd.getName() + "\t" + "ID: " + hd.getStudentID() + "\t" + "GAFE: " + hdGafe + "\t" + "Grade: " + hd.getGrade());
+		System.out.println("Name: " + pc.getName() + "\t" + "ID: " + pc.getStudentID() + "\t" + "GAFE: " + pcGafe + "\t" + "Grade: " + pc.getGrade());
+		System.out.println("Name: " + sb.getName() + "\t" + "ID: " + sb.getStudentID() + "\t" + "GAFE: " + sbGafe + "\t" + "Grade: " + sb.getGrade());
+		System.out.println("Name: " + hp.getName() + "\t" + "ID: " + hp.getStudentID() + "\t" + "GAFE: " + hpGafe + "\t" + "Grade: " + hp.getGrade());
+		System.out.println();
+		
+		int total = sw.getGrade()+hd.getGrade()+pc.getGrade()+sb.getGrade()+hp.getGrade();
+		System.out.println("Total: " + total);
+		double average = (double)total/5;
+		System.out.print("Average: ");
+		System.out.printf("%.02f", average);
+		System.out.println("\n");
+		double variance = (Math.pow(Math.abs(sw.getGrade()-average), 2) + Math.pow(Math.abs(hd.getGrade()-average), 2) + Math.pow(Math.abs(pc.getGrade()-average), 2) + Math.pow(Math.abs(sb.getGrade()-average), 2) + Math.pow(Math.abs(hp.getGrade()-average), 2))/5;
+		System.out.print("Variance: ");
+		System.out.printf("%.02f", variance);
+		System.out.println();
+		double stddev = Math.sqrt(variance);
+		System.out.print("Standard Deviation: ");
+		System.out.printf("%.02f", stddev);
+		
+	}
+}

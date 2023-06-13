@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract local variable &apos;parent&apos; from expression &apos;get(node)&apos;&#x0A;- Original project: &apos;Algorithms&apos;&#x0A;- Variable name: &apos;parent&apos;&#x0A;- Destination method: &apos;DSU.get2()&apos;&#x0A;- Variable expression: &apos;get(node)&apos;&#x0A;- Replace occurrences of expression with variable" description="Extract local variable &apos;parent&apos;" final="false" id="org.eclipse.jdt.ui.extract.temp" input="/src&lt;{DSU.java" name="parent" replace="true" selection="1129 9" stamp="1625868870030" varType="false" version="1.0"/>
+</session>

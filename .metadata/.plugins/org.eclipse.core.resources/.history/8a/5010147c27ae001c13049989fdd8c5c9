@@ -1,0 +1,11 @@
+import java.io.*;
+import java.util.*;
+public class Visits2 {
+	static int n;
+	static long[] v;
+	static int[] a;
+	static boolean[] visited;
+	public static void main(String[] args) throws Exception {
+		
+	}
+}

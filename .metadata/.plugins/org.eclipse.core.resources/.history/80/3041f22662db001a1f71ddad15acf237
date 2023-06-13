@@ -1,0 +1,236 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Genetics2 implements Comparable {
+	
+	private static int animalBrainSize=10;
+	private static double previousAverageX = 0;
+	private static double previousAverageY = 0;
+	
+	
+	
+	public static ArrayList<Animal> makePopulation(int popSize) {
+		ArrayList<Animal> population = new ArrayList<Animal>();
+		for (int i=0; i<popSize; i++) {
+			population.add(new Animal(0, 0, new Brain(animalBrainSize)));
+			population.get(i).updateCoors(population.get(i));
+		}
+		return population;
+	}
+	
+	public static ArrayList<Animal> makeNewGeneration(ArrayList<Animal> originalPop, int targetx, int targety) {
+		int fitCount=0;
+		ArrayList<Animal> nextGenParents = new ArrayList<Animal>();
+		ArrayList<Animal> nextGen = new ArrayList<Animal>();
+		for (int i=0; i<originalPop.size(); i++) {
+			double distanceToTarget = Math.sqrt((originalPop.get(i).xcoor-targetx)*(originalPop.get(i).xcoor-targetx) + (originalPop.get(i).ycoor-targety)*(originalPop.get(i).ycoor-targety));
+			double originalDistance = Math.sqrt((previousAverageX-targetx)*(previousAverageX-targetx) + (previousAverageY-targety)*(previousAverageY-targety));
+			originalPop.get(i).fitnessScore= distanceToTarget-originalDistance;
+			if (originalPop.get(i).fitnessScore<=0) {
+				originalPop.get(i).xcoor = 0;
+				originalPop.get(i).ycoor = 0;
+				nextGenParents.add(originalPop.get(i));
+				fitCount++;
+			}
+			if (originalPop.get(i).xcoor == targetx && originalPop.get(i).ycoor == targety) {
+				System.out.println("Congratulations! The target was reached!");
+				return null;
+			}
+//			double rando = Math.random();
+//			if (rando<reproductionChance) {
+//				nextGenParents.add(originalPop.get(i));
+//				nextGen.add(originalPop.get(i));
+//			}
+			
+		}
+		
+		Collections.sort(nextGenParents, new Comparator<Animal>() {
+			@Override
+		    public int compare(Animal c1, Animal c2) {
+		        return Double.compare(c1.getScore(), c2.getScore());
+		    }
+		});
+		
+		Animal bestOfGeneration = nextGenParents.get(nextGenParents.size()-1);
+		bestOfGeneration.updateCoors(bestOfGeneration);
+		System.out.println("The best animal of this generation was (" + bestOfGeneration.xcoor + ", " + bestOfGeneration.ycoor + ")" );
+		
+		
+		
+//		if (nextGenParents.size()<100 && nextGenParents.size()>1) {
+//			int numToAdd = 100-nextGenParents.size();
+//			for (int i=0; i<numToAdd; i++) {
+//				nextGenParents.add(bestOfGeneration);
+//			}
+//		}
+//		
+//		else if (nextGenParents.size()>50) {
+//			int numToRemove = nextGenParents.size()-50;
+//			for (int i=0; i<numToRemove; i++) {
+//				nextGenParents.remove(nextGenParents.get(i));
+//			}
+//		}
+		for(int i=0; i<nextGenParents.size(); i++) {
+			double reproductionChance=(i/(double) nextGenParents.size())*2;
+			double rando = Math.random();
+			if (rando<reproductionChance) {
+				for (int j=0; j<6; j++) {
+					Animal addThisA = nextGenParents.get(i);
+					Brain.mutateBrain(addThisA.brain);
+					nextGen.add(addThisA);
+				}
+//				Animal addThisA = nextGenParents.get(i);
+//				Brain.mutateBrain(addThisA.brain);
+//				nextGen.add(addThisA);
+//				Animal addThisB = nextGenParents.get(i);
+//				Brain.mutateBrain(addThisB.brain);
+//				nextGen.add(addThisB);
+//				Animal addThisC = nextGenParents.get(i);
+//				Brain.mutateBrain(addThisC.brain);
+//				nextGen.add(addThisC);
+			}
+			else {
+				nextGen.add(nextGenParents.get(i));
+//				Animal bestBaby = bestOfGeneration;
+//				Brain.mutateBrain(bestBaby.brain);
+//				nextGen.add(bestBaby);
+			}
+		}
+		
+		
+		return nextGen;
+	}
+	
+	public static ArrayList<Animal> makeNewGeneration2(ArrayList<Animal> originalPop, int targetx, int targety) {
+		int fitCount=0;
+		ArrayList<Animal> nextGenPossibleParents = new ArrayList<Animal>();
+		ArrayList<Animal> nextGenParents = new ArrayList<Animal>();
+		ArrayList<Animal> nextGen = new ArrayList<Animal>();
+		for (int i=0; i<originalPop.size(); i++) {
+			originalPop.get(i).fitnessScore = Math.sqrt((originalPop.get(i).xcoor-targetx)*(originalPop.get(i).xcoor-targetx) + (originalPop.get(i).ycoor-targety)*(originalPop.get(i).ycoor-targety));
+			nextGenPossibleParents.add(originalPop.get(i));
+		}
+		Collections.sort(nextGenPossibleParents, new Comparator<Animal>() {
+			@Override
+		    public int compare(Animal c1, Animal c2) {
+		        return Double.compare(c1.getScore(), c2.getScore());
+		    }
+		});
+		Animal bestAnimal = nextGenPossibleParents.get(0);
+		bestAnimal.updateCoors(bestAnimal);
+		System.out.println("the best animal of the generation was (" + bestAnimal.xcoor + ", " + bestAnimal.ycoor + ")");
+		bestAnimal.xcoor = 0;
+		bestAnimal.ycoor = 0;
+		for (int i=0; i<nextGenPossibleParents.size()/2; i++) {
+			nextGenParents.add(nextGenPossibleParents.get(i));
+		}
+		nextGenParents.add(bestAnimal);
+		for(int i=0; i<nextGenParents.size(); i++) {
+			System.out.println("Animal " + i + ": (" + nextGenParents.get(i).xcoor + ", "  + nextGenParents.get(i).ycoor + ")");
+			double reproductionChance=1-((i/(double) nextGenParents.size()));
+			double rando = Math.random();
+			if (rando<reproductionChance) {
+				for (int j=0; j<2; j++) {
+					Animal addThisA = nextGenParents.get(i);
+					Brain.mutateBrain(addThisA.brain);
+					nextGen.add(addThisA);
+				}
+			}
+//			double reproductionChance=(i/(double) nextGenParents.size())*2;
+//			double rando = Math.random();
+//			if (rando<reproductionChance) {
+//				for (int j=0; j<2; j++) {
+//					Animal addThisA = nextGenParents.get(i);
+//					Brain.mutateBrain(addThisA.brain);
+//					nextGen.add(addThisA);
+//				}
+////				Animal addThisA = nextGenParents.get(i);
+////				Brain.mutateBrain(addThisA.brain);
+////				nextGen.add(addThisA);
+////				Animal addThisB = nextGenParents.get(i);
+////				Brain.mutateBrain(addThisB.brain);
+////				nextGen.add(addThisB);
+////				Animal addThisC = nextGenParents.get(i);
+////				Brain.mutateBrain(addThisC.brain);
+////				nextGen.add(addThisC);
+//			}
+			else {
+				nextGen.add(nextGenParents.get(i));
+//				Animal bestBaby = bestOfGeneration;
+//				Brain.mutateBrain(bestBaby.brain);
+//				nextGen.add(bestBaby);
+			}
+		}
+		nextGen.add(bestAnimal);
+		return nextGen;
+	}
+	
+	public ArrayList<Animal> runGeneration(ArrayList<Animal> originalPop) {
+		for (int i=0; i<originalPop.size(); i++) {
+			originalPop.get(i).updateCoors(originalPop.get(i));
+		}
+		return originalPop;
+	}
+	
+	public void printAverageCoors(ArrayList<Animal> population) {
+		int xSum=0;
+		int ySum=0;
+		for (int i=0; i<population.size(); i++) {
+			xSum+= population.get(i).xcoor;
+			ySum+= population.get(i).ycoor;
+		}
+		double averageX = xSum/(double) population.size();
+		double averageY = ySum/(double) population.size();
+		System.out.println("(" + averageX + ", " + averageY + ")");
+	}
+	
+	public static double getAverageX(ArrayList<Animal> population) {
+		int xSum=0;
+		for (int i=0; i<population.size(); i++) {
+			xSum+= population.get(i).xcoor;
+		}
+		double averageX = xSum/(double) population.size();
+		return averageX;
+	}
+	public static double getAverageY(ArrayList<Animal> population) {
+		int ySum=0;
+		for (int i=0; i<population.size(); i++) {
+			ySum+= population.get(i).ycoor;
+		}
+		double averageY = ySum/(double) population.size();
+		return averageY;
+	}
+	
+	public static void main(String[] args) {
+		Genetics2 test = new Genetics2();
+		ArrayList<Animal> popo = makePopulation(100);
+		ArrayList<Animal> currentPop = popo;
+		test.printAverageCoors(popo);
+		previousAverageY = getAverageY(popo);
+		previousAverageX = getAverageX(popo);
+		for (int i=0; i<15; i++) {
+			ArrayList<Animal> gen2 = makeNewGeneration2(currentPop, 0, 10);
+//			test.printAverageCoors(gen2);
+			test.runGeneration(gen2);
+			System.out.println("The size of this population was " + gen2.size());
+			test.printAverageCoors(gen2);
+			currentPop = gen2;
+			System.out.println("this was the end of generation " + i);
+			previousAverageY = getAverageY(gen2);
+			previousAverageX = getAverageX(gen2);
+		}
+		
+	}
+	
+//This is just here for some reason. It doesn't do anything but I can't delete it.
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+	
+
+}

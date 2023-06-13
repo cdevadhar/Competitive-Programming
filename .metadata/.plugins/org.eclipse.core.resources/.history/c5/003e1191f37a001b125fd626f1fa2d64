@@ -1,0 +1,18 @@
+import java.io.*;
+import java.util.*;
+public class GreenEnough {
+	static int n;
+	static int[][] pasture;
+	static int[][] visited;
+	static Scanner in;
+	public static void main(String[] args) {
+		in = new Scanner(System.in);
+		n = in.nextInt();
+		pasture = new int[n][n];
+		for (int i=0; i<n; i++) {
+			for (int j=0; j<n; j++) {
+				pasture[i][j] = in.nextInt();
+			}
+		}
+	}
+}

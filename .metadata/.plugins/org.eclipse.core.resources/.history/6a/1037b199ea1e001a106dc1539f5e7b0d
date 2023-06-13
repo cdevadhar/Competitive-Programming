@@ -1,0 +1,34 @@
+import java.util.ArrayList;
+
+public class Round {
+	private int roundNumber;
+	private ArrayList<Match> matches;
+	public Round(int roundNumber) {
+		matches = new ArrayList<Match>(32);
+		this.roundNumber = roundNumber;	
+	}
+	public void createMatch(Match debateMatch) {
+		matches.add(debateMatch);
+	}
+	public String toString() {
+		return "Round " + roundNumber + ": " + matches;
+	}
+	public static void main(String[] args) {
+		DebateClub WhsDebate = new DebateClub("WhsDebate");
+		Student Chinmay = new Student("Chinmay Devadhar", 9, WhsDebate);
+		Student Tharun = new Student("Tharun Sankar", 9, WhsDebate);
+		Team WashingtonDevadharSankar = new Team(Chinmay, Tharun, "Washington DL");
+		DebateClub IhsDebate = new DebateClub("IhsDebate");
+		Student Joe = new Student("Joe Mama", 9, IhsDebate);
+		Student Steve = new Student("Steve Mama", 9, IhsDebate);
+		Team IrvingtonMamaMama = new Team(Joe, Steve, "Irvington MM");
+		Match testMatch = new Match(IrvingtonMamaMama,WashingtonDevadharSankar );
+		Match testMatch2 = new Match(IrvingtonMamaMama,WashingtonDevadharSankar );
+		Round firstRound = new Round(1);
+		firstRound.createMatch(testMatch);
+		firstRound.createMatch(testMatch2);
+		System.out.println(firstRound);
+		
+	}
+
+}

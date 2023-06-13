@@ -1,0 +1,94 @@
+import java.util.ArrayList;
+
+public class Round {
+	private int roundNumber;
+	private ArrayList<Match> matches;
+	private ArrayList<Team> teams;
+
+	public Round(int roundNumber, ArrayList<Team> teams, ArrayList<Match> previousMatches) {
+		matches = new ArrayList<Match>(32);
+		this.roundNumber = roundNumber;	
+		this.teams = teams;
+
+		createMatches(previousMatches);
+	}
+
+	private void createMatches(ArrayList<Match> previousMatches) {
+		ArrayList<Team> alreadyPicked = new ArrayList<Team>();
+
+		for (Team teamA : this.teams) {
+			if (!alreadyPicked.contains(teamA)) {
+				
+				for (Team teamB : this.teams) {
+					if ((!alreadyPicked.contains(teamB)) && (teamA != teamB)) {
+						
+						Match nextMatch = new Match(teamA, teamB);
+						
+						if (!previousMatches.contains(nextMatch)) {
+							matches.add(nextMatch);
+							alreadyPicked.add(teamA);
+							alreadyPicked.add(teamB);
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	public ArrayList<Match> getMatches() {
+		return this.matches;
+	}
+
+	public void play() {
+		for (Match match: matches) {
+			match.playMatch();
+			System.out.println(match.getWinner());
+		}
+	}
+
+	public String toString() {
+		return "Round " + roundNumber + ": " + matches + "\n";
+	}
+
+	public static void main(String[] args) {
+		ArrayList<Team> teams = createTestTeams();
+
+		Round firstRound = new Round(1, teams, new ArrayList<Match> ());
+
+		System.out.println(firstRound);
+		firstRound.play();
+		
+
+
+	}
+
+	public static ArrayList<Team> createTestTeams() {
+		DebateClub WhsDebate = new DebateClub("WhsDebate");
+
+		Student Chinmay = new Student("Chinmay Devadhar", 9, WhsDebate);
+		Student Tharun = new Student("Tharun Sankar", 9, WhsDebate);
+
+		Team WashingtonDevadharSankar = new Team(Chinmay, Tharun, "Washington DS");
+
+		DebateClub IhsDebate = new DebateClub("IhsDebate");
+
+		Student Joe = new Student("Joe Mama", 9, IhsDebate);
+		Student Steve = new Student("Steve Mama", 9, IhsDebate);
+
+		Team IrvingtonMamaMama = new Team(Joe, Steve, "Irvington MM");
+
+		ArrayList<Team> teams = new ArrayList<Team>();
+//		teams.add(WashingtonDevadharSankar);
+//		teams.add(IrvingtonMamaMama);
+		for(int i = 0; i<64;i++)  {
+			DebateClub debateTeam = new DebateClub("Debate Club " + i);
+			Student student1 = new Student("Student", 9, debateTeam);
+			Student student2 = new Student("Student", 9, debateTeam);
+			Team team = new Team(student1, student2, "Team " + i);
+			teams.add(team);
+		}
+		return teams;
+	}
+
+}

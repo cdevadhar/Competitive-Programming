@@ -1,0 +1,55 @@
+import java.io.*;
+import java.util.*;
+public class MilkVisits {
+	static int n, m;
+	static ArrayList<ArrayList<Integer>> adjacent;
+	static char[] milkTypes;
+	static char[] milkPreferences;
+	public static void main(String[] args) throws IOException {
+		BufferedReader bi = new BufferedReader(new FileReader(new File("USACOinput1")));
+		StringTokenizer st = new StringTokenizer(bi.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		adjacent = new ArrayList<ArrayList<Integer>>();
+		milkTypes = new char[n];
+		milkPreferences = new char[m];
+		st = new StringTokenizer(bi.readLine());
+		String s = st.nextToken();
+		for (int i=0; i<n; i++) {
+			milkTypes[i] = s.charAt(i);
+			adjacent.add(new ArrayList<Integer>());
+		}
+		for (int i=0; i<n-1; i++) {
+			st = new StringTokenizer(bi.readLine());
+			int a = Integer.parseInt(st.nextToken())-1;
+			int b = Integer.parseInt(st.nextToken())-1;
+			adjacent.get(a).add(b);
+			adjacent.get(b).add(a);
+		}
+		for (int i=0; i<m; i++) {
+			st = new StringTokenizer(bi.readLine());
+			int a = Integer.parseInt(st.nextToken())-1;
+			int b = Integer.parseInt(st.nextToken())-1;
+			char c = st.nextToken().charAt(0);
+			milkPreferences[i] = c;
+			
+		}
+	}
+	
+	public static void dfs(int node, int target) {
+		Stack<Integer> stack = new Stack<Integer>();
+		boolean[] visited = new boolean[n];
+		visited[node] = true;
+		stack.add(node);
+		while (!stack.isEmpty()) {
+			int current = stack.pop();
+			for (int i=0; i<adjacent.get(current).size(); i++) {
+				if (milkTypes[adjacent.get(current).get(i)] == milkTypes[current] && !visited[adjacent.get(current).get(i)]) {
+					visited[adjacent.get(current).get(i)] = true;
+					stack.add(adjacent.get(current).get(i));
+				}
+			}
+		}
+		
+	}
+}

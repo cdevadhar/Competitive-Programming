@@ -1,0 +1,89 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class HangMan {
+	public static int errorsBeforeHang = 3;
+	private String secretWord;
+	
+	private char[] correctGuesses;
+	private int errorCount;
+	
+	private ArrayList<String> lettersEntered = new ArrayList<>();
+	
+	public static String chooseWord(String word) {
+		return word;
+	}
+	
+	public void initGame() {
+		errorCount = 0;
+		secretWord = chooseWord("dogg");
+		correctGuesses = new char [secretWord.length()];
+		for (int i=0; i<correctGuesses.length; i++) {
+			correctGuesses[i] = '_';
+		}
+	}
+	
+	public void guess(String letter) {
+		if (!lettersEntered.contains(letter)) {
+			if (secretWord.contains(letter)) {
+				for (int i=0; i<correctGuesses.length; i++) {
+					if (secretWord.indexOf(letter.charAt(0)) == i) {
+						correctGuesses[i] = letter.charAt(0);
+					}
+				}
+			}
+			else {
+				errorCount +=1;
+				System.out.print("Life lost");
+			}
+			lettersEntered.add(letter);
+		}
+		else {
+			System.out.println("Letter already entered");
+		}
+	}
+	
+	public String betweenGuessUpdate() {
+		StringBuilder userUpdate = new StringBuilder();
+		for (int i=0; i<correctGuesses.length; i++) {
+			userUpdate.append(correctGuesses[i]);
+			userUpdate.append(" ");
+			
+		}
+		return userUpdate.toString();
+	}
+	
+	public void playGame() {
+		Scanner input = new Scanner(System.in);
+		while (errorCount<errorsBeforeHang) {
+			System.out.println(">");
+			String guess = input.next();
+			guess(guess);
+			System.out.println();
+			
+			String correctGuessesString = "";
+			for (int i = 0; i<correctGuesses.length; i++) {
+				correctGuessesString += correctGuesses[i];
+			}
+			if (correctGuessesString.contentEquals(secretWord)) {
+				System.out.println("You saved the man.");
+				System.out.println(betweenGuessUpdate());
+				break;
+			}
+			else {
+				System.out.println("Remaining Lives: " + (errorsBeforeHang-errorCount));
+			}
+			if (errorCount == errorsBeforeHang) {
+				System.out.println("You lost");
+			}
+			System.out.println(betweenGuessUpdate());
+		}
+	}
+	
+	public static void main(String[] args) {
+		HangMan test = new HangMan();
+		test.initGame();
+		test.playGame();
+	}
+
+}

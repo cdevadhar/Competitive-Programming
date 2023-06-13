@@ -1,0 +1,34 @@
+
+public class StringCompress {
+	public void compressThis(String oldString) {
+		String input = "AAABBBBCC";
+
+		int count = 1;
+
+		String last = Character.toString(input.charAt(0));
+
+		String output = "";
+
+		for(int i = 1; i < input.length(); i++){
+		    if(Character.toString(input.charAt(i)) == last){
+		    count++;
+		    }else{
+		        if(count > 1){
+		            output.concat(""+count+last);
+		        }else{
+		            output.concat(last);
+		        }
+		    count = 1;
+		    last = Character.toString(input.charAt(i));
+		    }
+		}
+		if(count > 1){
+		    output.concat(""+count+last);
+		}else{
+		    output.concat(last);
+		}
+		System.out.println(output.toString());
+			
+	}
+
+}

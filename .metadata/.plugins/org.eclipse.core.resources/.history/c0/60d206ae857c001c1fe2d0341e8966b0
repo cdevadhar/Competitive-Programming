@@ -1,0 +1,57 @@
+import java.io.*;
+import java.util.*;
+public class SaveNature {
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	    StringTokenizer st = new StringTokenizer(br.readLine());
+	    int q = Integer.parseInt(st.nextToken());
+	    for (int i=0; i<q; i++) {
+	    	int n = Integer.parseInt(br.readLine());
+	    	st = new StringTokenizer(br.readLine());
+	    	int[] prices = new int[n];
+	    	for (int j=0; j<n; j++) {
+	    		prices[j] = Integer.parseInt(st.nextToken());
+	    	}
+	    	st = new StringTokenizer(br.readLine());
+	    	int x = Integer.parseInt(st.nextToken());
+	    	int a = Integer.parseInt(st.nextToken());
+	    	st = new StringTokenizer(br.readLine());
+	    	int y = Integer.parseInt(st.nextToken());
+	    	int b = Integer.parseInt(st.nextToken());
+	    	long k = Long.parseLong(br.readLine());
+	    }
+	    int[] test = {100,200,100,200,100,200,100,100};
+	    System.out.println(doesContribute(8, test, 10, 2, 15, 3, 107));
+	}
+	
+	public static boolean doesContribute(int tickets, int[] prices, int x, int a, int y, int b, int k) {
+		int contribution = 0;
+		Arrays.parallelSort(prices);
+		int[] ticketsNeeded = Arrays.copyOfRange(prices, prices.length-tickets, prices.length);
+		int xcont = 0;
+		int ycont = 0;
+		int xycont = 0;
+		for (int i=0; i<tickets; i++) {
+			if (i%x==0 && i%y==0) xycont++;
+			else if (i%x==0) xcont++;
+			else if (i%y==0) ycont++;
+			
+		}
+		for (int i=tickets-1; i>=0; i--) {
+			if (xycont>0) {
+				contribution += (ticketsNeeded[i]*a)/100 + (ticketsNeeded[i]*b)/100;
+				xycont--;
+			}
+			else if (xcont>0) {
+				contribution += (ticketsNeeded[i]*a)/100;
+				xcont--;
+			}
+			else if (ycont>0) {
+				contribution += (ticketsNeeded[i]*b)/100;
+				ycont--;
+			}
+		}
+		if (contribution>=k) return true;
+		return false;
+	}
+}

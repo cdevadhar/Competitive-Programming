@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;chinmay_apcs&apos; to &apos;labs_projects&apos;&#x0A;- Original project: &apos;chinmay_apcs&apos;&#x0A;- Original element: &apos;chinmay_apcs/src/chinmay_apcs&apos;&#x0A;- Renamed element: &apos;chinmay_apcs/src/labs_projects&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;chinmay_apcs&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;chinmay_apcs" name="labs_projects" qualified="false" references="true" stamp="1630607525453" textual="false" version="1.0"/>
+</session>

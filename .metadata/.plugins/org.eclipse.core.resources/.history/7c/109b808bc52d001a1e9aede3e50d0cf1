@@ -1,0 +1,107 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Tournament {
+	private DebateClub hostClub;
+	private String tournamentName;
+	private int date;
+	private ArrayList<Team> competitors;
+	private ArrayList<Round> rounds;
+	private ArrayList<Round> knockouts;
+	public Tournament(DebateClub hostClub, String tournamentName, int date) {
+		competitors = new ArrayList<Team>(64);
+		rounds = new ArrayList<Round>();
+		this.hostClub = hostClub;
+		this.tournamentName = tournamentName;
+		this.date = date;
+	}
+	public void addTeam(Team debaters) {
+		competitors.add(debaters);
+	}
+	public ArrayList<Round> createRounds(int maxRounds) {
+		ArrayList<Match> previousmatches = new ArrayList<Match>();
+		for (int i=0; i<maxRounds; i++) {
+			Round round = new Round(i, this.competitors, previousmatches);
+			rounds.add(round);
+			previousmatches.addAll(round.getMatches());
+		}
+		return rounds;
+	}
+	public void createKnockouts(ArrayList<Team> winners) {
+		ArrayList<WinTrack> allTeamWins = new ArrayList<WinTrack>();
+		for (Team team: this.competitors) {
+			ArrayList<Team> winTracker = new ArrayList<Team>();
+			
+			
+			for (Round round: rounds) {
+				for (Match match: round.getMatches()) {
+					if (team == match.getWinner()) {
+						winTracker.add(team);
+					}
+				}
+			}
+			WinTrack numberOfWins = new WinTrack(team, winTracker.size());
+			allTeamWins.add(numberOfWins);
+			
+		}
+		Collections.sort(allTeamWins, Collections.reverseOrder());
+		System.out.println(allTeamWins);
+		
+		ArrayList<WinTrack> topTeamResults = new ArrayList<WinTrack>();
+		for (int i=0; i<32; i++) {
+			topTeamResults.add(allTeamWins.get(i));
+		}
+		System.out.println(topTeamResults);
+		ArrayList<Team> topTeams = new ArrayList<Team>();
+		for (WinTrack wintrack: topTeamResults) {
+			topTeams.add(wintrack.getTeamToTrack());
+		}
+		System.out.println(topTeams);
+		ArrayList<Match> previousmatches = new ArrayList<Match>();
+		for (int i=0; i<5; i++) {
+			Round knockoutRound = new Round(i, topTeams, previousmatches);
+			knockoutRound.play();
+			knockouts.add(knockoutRound);
+			ArrayList<Team> teamsToRemove = new ArrayList<Team>();
+			for (Team team: topTeams) {
+				teamsToRemove.add(team);	
+			}
+			topTeams.removeAll(teamsToRemove);
+			for (Team team: knockoutRound.getTeams()) {
+				for (Match match: knockoutRound.getMatches()) {
+					if (team == match.getWinner()) {
+						topTeams.add(team);
+					}
+				}
+			}
+		}
+		System.out.println(knockouts);
+	}
+	
+
+		public String toString() {
+		return "Tournament: " + tournamentName + " held by " + hostClub.getName() + competitors;
+	}
+	public static void main(String[] args) {
+		DebateClub SCUDebate = new DebateClub("SCUDebate");
+
+		Tournament scuTourney = new Tournament(SCUDebate, "Dempsey-Cronin Inv.", 22);
+		
+		ArrayList<Team> teams = Round.createTestTeams();
+		
+		for (Team team : teams) {
+			scuTourney.addTeam(team);
+		}
+		
+		ArrayList<Round> allRounds = scuTourney.createRounds(6);
+		
+		System.out.println(scuTourney.rounds);
+		for (Round round: allRounds) {
+			round.play();
+		}
+		scuTourney.createKnockouts(teams);
+		
+		
+	}
+
+}

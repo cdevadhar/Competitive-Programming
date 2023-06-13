@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+public class GreenEnough {
+	static int n;
+	static int[][] pasture;
+	static boolean [][] visited;
+	static Scanner in;
+	public static void main(String[] args) {
+		in = new Scanner(System.in);
+		n = in.nextInt();
+		pasture = new int[n][n];
+		visited = new boolean[n][n];
+		for (int i=0; i<n; i++) {
+			for (int j=0; j<n; j++) {
+				pasture[i][j] = in.nextInt();
+			}
+		}
+		
+		for (int i=0; i<n; i++) {
+			for (int j=0; j<n; j++) {
+				if (pasture[i][j]==100) {
+					
+				}
+			}
+		}
+	}
+	public static void floodfill(int x, int y) {
+		if (x<0||x>=n||y<0||y>=n) return;
+		if (pasture[x][y]<100) return;
+		if (visited[x][y]) return;
+		visited[x][y] = true;
+		System.out.println(pasture[x][y]);
+		floodfill(x+1, y);
+		floodfill(x-1, y);
+		floodfill(x, y+1);
+		floodfill(x, y-1);
+		
+		
+		
+	}
+	
+	
+}

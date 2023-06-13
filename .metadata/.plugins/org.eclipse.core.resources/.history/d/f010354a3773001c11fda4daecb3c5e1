@@ -1,0 +1,117 @@
+import java.io.*;
+import java.util.*;
+public class Palindrome {
+	public static void main(String[] args) throws Exception {
+		FastIO in = new FastIO();
+		int t = in.nextInt();
+		for (int tc=0; tc<t; tc++) {
+			int n = in.nextInt();
+			int k = in.nextInt();
+			String s = in.next();
+			HashMap<Character, Integer> occurences = new HashMap<Character, Integer>();
+			for (int i=0; i<n; i++) {
+				Character curr = s.charAt(i);
+				occurences.putIfAbsent(curr, 0);
+				occurences.put(curr, occurences.get(curr)+1);
+			}
+			Set<Character> keys = occurences.keySet();
+			ArrayList<Letter> str = new ArrayList<Letter>();
+			for (Character key: keys) {
+				str.add(new Letter(key, occurences.get(key)));
+			}
+			Collections.sort(str, (o1, o2) -> Integer.compare(o2.occurences, o1.occurences));
+			String newStr = "";
+			for (Letter l: str) {
+				for (int i=0; i<l.occurences; i++) {
+					newStr+=l.value;
+				}
+			}
+//			for (int i=10; i>0; i--) {
+//				if (doesWork(i, k, newStr, occurences)) {
+//					System.out.println(i);
+//					break;
+//				}
+//			}
+			System.out.println(doesWork(2, k, newStr, occurences));
+		}
+	}
+	public static boolean doesWork(int minLength, int k, String str, HashMap<Character, Integer> occurences) {
+		int currSize=0;
+		int index=0;
+		int count=0;
+		boolean odd=true;
+		if (minLength%2==0) odd = false;
+		while (index<str.length()) {
+			if (currSize==minLength) {
+				currSize=0;
+				count++;
+				if (minLength%2==1) odd = true;
+			}
+			if (index<str.length()-1 && str.charAt(index)!=str.charAt(index+1)) {
+				if (!odd) {
+					if (occurences.get(str.charAt(index))%2==1) {
+						index++;
+						continue;
+					}
+				}
+				else {
+					
+					if (occurences.get(str.charAt(index))%2==1) odd = false;
+				}
+			}
+			
+			currSize++;
+			index++;
+//			System.out.println(index+" "+currSize);
+		}
+		if (currSize==minLength) {
+			count++;
+		}
+		System.out.println(count);
+		if (count>=k) return true;
+		return false;
+	}
+	static class Letter {
+		char value;
+		int occurences;
+		public Letter(char value, int occurences) {
+			this.value = value;
+			this.occurences = occurences;
+		}
+	}
+	static class FastIO {
+		BufferedReader br;
+	    StringTokenizer st;
+	    public FastIO() throws IOException
+	    {
+	        br = new BufferedReader(
+	            new InputStreamReader(System.in));
+
+	    }
+	    
+
+	    public String next() throws IOException
+	    {
+	        while (st == null || !st.hasMoreElements()) {
+	           
+	            st = new StringTokenizer(br.readLine());
+	        }
+	        return st.nextToken();
+	    }
+
+	    public int nextInt() throws NumberFormatException, IOException { return Integer.parseInt(next()); }
+
+	    public long nextLong() throws NumberFormatException, IOException { return Long.parseLong(next()); }
+
+	    public double nextDouble() throws NumberFormatException, IOException
+	    {
+	        return Double.parseDouble(next());
+	    }
+
+	    public String nextLine() throws IOException
+	    {
+	        String str = br.readLine();
+	        return str;
+	    }
+	}
+}

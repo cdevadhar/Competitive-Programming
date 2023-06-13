@@ -1,0 +1,30 @@
+import java.io.*;
+import java.util.*;
+public class CowPairs {
+	static int n;
+	static ArrayList<Integer> cowtimes;
+	static Scanner in;
+	public static void main(String[] args) {
+		in = new Scanner(System.in);
+		n = in.nextInt();
+		cowtimes = new ArrayList<Integer>();
+		for (int i=0; i<n; i++) {
+			int a = in.nextInt();
+			int b = in.nextInt();
+			for (int j=0; j<a; j++) {
+				cowtimes.add(b);
+			}
+		}
+		Collections.sort(cowtimes);
+		minTime();
+	}
+	
+	public static void minTime() {
+		int max=0;
+		for (int i=0; i<cowtimes.size(); i++) {
+			int time = cowtimes.get(i) + cowtimes.get(cowtimes.size()-i-1);
+			if (time>max) max = time;
+		}
+		System.out.println(max);
+	}
+}
